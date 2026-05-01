@@ -1,20 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package main;
 
-/**
- *
- * @author USUARIO
- */
+import estructuras.ABB;
+import modelo.Cancion;
+
+
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        //prueba01 - insercion y recorrido InORDER.
+        ABB ab = new ABB();
+        Cancion c1 = new Cancion();
+        Cancion c2 = new Cancion();
+        ab.insertar(30, c2);
+        ab.insertar(0, c1);
+        ab.insertar(10, c2);
+        ab.insertar(1, c2);
+        ab.insertar(7, c1);
+       
+        
+        ab.recorridoInOrden(ab.getRaiz());
     }
     
 }
