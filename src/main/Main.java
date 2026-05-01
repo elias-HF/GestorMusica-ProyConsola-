@@ -22,6 +22,24 @@ public class Main {
        
         
         ab.recorridoInOrden(ab.getRaiz());
+        //prueba02 - busqueda y eliminacion.
+        Cancion c = ab.buscar(1);
+        
+        if(c !=null){
+            System.out.println("Cancion encontrada: \n"+c);
+        }else{
+            System.out.println("Cancion no encontrada...");
+        }
+        
+        //eliminar 
+        
+        if(ab.eliminar(1) !=false){
+            System.out.println("Cancion eliminada");
+        }else{
+            System.out.println("No se pudo eliminar la cancion");
+        }
+        
+        ab.recorridoInOrden(ab.getRaiz());
     }
     
 }

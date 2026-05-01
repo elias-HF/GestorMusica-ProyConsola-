@@ -3,7 +3,7 @@ package estructuras;
 
 import modelo.Cancion;
 
-
+// arbol binario de busqueda
 public class ABB {
     
     Nodo raiz;
@@ -51,7 +51,7 @@ public class ABB {
                 //lo guarda en un auxiliar antes de asignar directamente el valor, por razones de seguridad.
                 n.padre = aux;
                 //aqui ordena de menor a mayor los indices comparandolos..
-                if(n.llave >= aux.llave ){
+                if(n.llave > aux.llave ){
                     //si el indice es mayor o igual, entonces lo coloca a su derecha, caso contrario a su izquierda(partiendo desde la raiz y bajando) (ejm 1,3,5,6,19,20) 
                     aux = aux.derecha;
                 }else{
@@ -67,12 +67,101 @@ public class ABB {
         }
     }
     
-    public void buscar(int i){
+    public Cancion buscar(int i){
+        Nodo aux= raiz;
+        
+        while(aux != null){
+            //si el indice buscado coicide con la raiz, entonces devuelve la cacion, caso contrarios empezara a buscar por la izquierda y luego la derecha.
+            if(i==aux.llave){
+                return aux.contenido;
+            }else if(i < aux.llave){
+                aux = aux.izquierda;
+            }else{
+                aux = aux.derecha;
+            }
+        }
+        //cancion no encontrada.
+        return null;
+    }
+    
+
+    //se econtro 3 formas de eliminar un nodo en arboles binarios: 1.eliminar solo un nodo 2. eliminar el nodo y su hijo  3.eliminar 2 hijos
+    
+    //Metodo para buscar el "NODO".
+    public Nodo buscarNodo(int i){
+        Nodo aux = raiz;
+        while(aux !=null){
+            if(i == aux.llave){
+                return aux;
+            }else if(i < aux.llave){
+                aux = aux.izquierda;
+            }else{
+                aux = aux.derecha;
+            }
+        }
+        //no encuentra el nodo
+        return null;
+    }
+    
+    //metodo para encontrar el sucesor:
+    
+    public Nodo minimo(Nodo n){
+        while(n.izquierda != null){
+            n = n.izquierda;
+        }
+        return n;
+    }
+    
+    public boolean eliminar(int i){
+        Nodo nodo = buscarNodo(i);
+        //Nodo no encontrado.
+        if(nodo == null){
+            return false;
+        }
+        //si sus nodos izq o der estan vacios, es decir si es una hoja  o tiene un hijo, entonces.
+        if(nodo.izquierda == null || nodo.derecha == null){
+            
+            Nodo hijo;
+            //aqui ve que hijo(izq o der esta vacio o lleno), identificamos al hijo
+            if(nodo.izquierda != null){
+                hijo = nodo.izquierda;
+            }else{
+                hijo = nodo.derecha;
+            }
+            //si el nodo que quieres  eliminar es la raiz, si es la raiz entonces el hijo se convierte en la nueva raiz.
+            
+            if(nodo.padre == null){
+                raiz = hijo;
+            }else if(nodo == nodo.padre.izquierda){
+                nodo.padre.izquierda = hijo;
+            }else{
+                nodo.padre.derecha = hijo;
+            }
+            //si tiene hijo
+            if(hijo != null){
+                hijo.padre = nodo.padre;
+            }
+            
+        }else{ //si tiene 2 hijos (izq y derecha no son null)
+            //el sucesor va a ser el menor del lado derecho
+            Nodo sucesor = minimo(nodo.derecha);
+            //copiamos los datos.
+            nodo.llave = sucesor.llave;
+            nodo.contenido = sucesor.contenido;
+            
+            //eliminamos a su sucesor
+            eliminar(sucesor.llave);
+            
+        }
+        //nodo eliminado
+        return true;
+        
+        
         
     }
-    public void eliminar(int i){
         
-    }
+        
+    
     
     public void recorridoInOrden(Nodo n){
         if(n!=null){
