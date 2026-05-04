@@ -33,7 +33,7 @@ public class Main {
         
         //eliminar 
         
-        if(ab.eliminar(1) !=false){
+        if(ab.eliminar(30) !=false){
             System.out.println("Cancion eliminada");
         }else{
             System.out.println("No se pudo eliminar la cancion");

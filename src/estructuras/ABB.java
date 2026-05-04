@@ -51,7 +51,7 @@ public class ABB {
                 //lo guarda en un auxiliar antes de asignar directamente el valor, por razones de seguridad.
                 n.padre = aux;
                 //aqui ordena de menor a mayor los indices comparandolos..
-                if(n.llave > aux.llave ){
+                if(n.llave >= aux.llave ){
                     //si el indice es mayor o igual, entonces lo coloca a su derecha, caso contrario a su izquierda(partiendo desde la raiz y bajando) (ejm 1,3,5,6,19,20) 
                     aux = aux.derecha;
                 }else{
