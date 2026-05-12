@@ -6,7 +6,7 @@ import modelo.Cancion;
 //arbol binario de busqueda balanceado o avl
 public class AVL {
     
-    Nodo raiz;
+    private Nodo raiz;
     
     public AVL(){
         raiz=null;
@@ -19,12 +19,13 @@ public class AVL {
         private Cancion contenido;
         private int altura;
 
-        public Nodo(int indice) {
+        public Nodo(int indice, Cancion c) {
             llave = indice;
-            derecha=null;
+            contenido=c;
+            derecha = null;
             izquierda = null;
-            contenido=null;
             altura = 0;
+            
         }
         
         
@@ -82,12 +83,11 @@ public class AVL {
     
     //si el arbol esta desbalanceado necesita ser balanceado.
     
-    public Nodo insertarConRotaciones(Nodo n, int i, Cancion c){
+    private Nodo insertarConRotaciones(Nodo n, int i, Cancion c){
         
         if(n == null){
-            Nodo nuevoNodo = new Nodo(i);
-            nuevoNodo.contenido = c;
-            return nuevoNodo;
+            return new Nodo(i,c);
+             
         }
         
         if(i < n.llave){
@@ -134,17 +134,122 @@ public class AVL {
     public void insertar(int i, Cancion c){ //ordenado y baleanceado
         raiz =insertarConRotaciones(raiz,i,c);
     } 
-    
+    //para buscar la cancion
     public Cancion buscar(int i){
+        Nodo encontrado =buscarNodo(raiz,i);
+        
+        if(encontrado != null){
+            return encontrado.contenido;
+        }
         return null;
     }
-    public void eliminar(int i){
+    
+    //buscamos el minimo (subMetodo para eliminarAVL).
+    private Nodo minimo(Nodo n){
+        while(n.izquierda != null){
+            n = n.izquierda;
+        }
+        return n;
+    }
+    //para buscar el nodo(se utilizara en eliminar)
+    //le pasamos el nodo donde me encuentro actualmente Nodo n .
+    private Nodo buscarNodo(Nodo n,int i){
+        if(n == null){
+            return null;
+        }
+        //encontramos el nodo correspondiente
+        if(i == n.llave){
+            return n;
+        }
+        //buscamos por la izquierda si la llave buscada es menor a la raiz actual, caso contrario buscamos por la derecha
+        if(i<n.llave){
+            return buscarNodo(n.izquierda,i);
+        }else{
+            return buscarNodo(n.derecha,i);
+        }
         
+    }
+    //el metodo que usara el usuario.
+    public void eliminar(int i){
+        raiz = eliminarAVL(raiz,i);
+    }
+    //metodo recursivo.
+    private Nodo eliminarAVL(Nodo n, int i){
+        //buscar dentro del metodo eliminar.    paso 1
+        //primero se elimina el nodo.           paso 2 
+        //y luego se balancea.                  paso 3
+        //busqueda..
+        if (n == null){
+            //nodo no encontrado
+            return null;
+        }
+        //ningun o un solo hijo, 
+        if(i < n.llave){
+            n.izquierda = eliminarAVL(n.izquierda, i); 
+        }else if(i >n.llave){
+            n.derecha = eliminarAVL(n.derecha, i);
+        }else{ // si se encontro el nodo en la busqueda.
+            if(n.izquierda == null || n.derecha == null){ // 0 o 1 hijo.
+                //obtenemos el hijo. // el hijo reemplaza al nodo.
+                Nodo temp; 
+                if(n.izquierda != null){
+                    temp = n.izquierda;
+                }else{
+                    temp = n.derecha;
+                }
+                
+                if(temp == null){
+                    n = null;
+                }else{
+                    n = temp;
+                }  
+                
+            }else{
+                Nodo temp = minimo(n.derecha);
+                //copiamos los datos
+                n.llave = temp.llave;
+                n.contenido = temp.contenido;
+                
+                n.derecha = eliminarAVL(n.derecha, temp.llave);
+            }
+            return n;
+        }
+           
+        if(n == null){
+                return null;
+            }
+            
+        
+        //balanceo.
+        
+        actualizarAltura(n);
+        int balance = obtenerBalance(n);
+        //rotaciones 
+        //Rotacion Simple derecha(LL)
+            if(balance > 1 && obtenerBalance(n.izquierda) >= 0 ){
+                return rotarDerecha(n);
+            }
+            //Rotacion Simple izquierda(RR)
+            if(balance < -1 && obtenerBalance(n.derecha) <= 0){
+                return rotarIzquierda(n);
+            }
+            //Rotacion Double Izquierda - Derecha(LR)
+            if(balance > 1 && obtenerBalance(n.izquierda) < 0 ){
+                n.izquierda = rotarIzquierda(n.izquierda);
+                return rotarDerecha(n);
+            }
+            //Rotacion Doble Derecha - Izquierda(RL)
+            if(balance < -1 && obtenerBalance(n.derecha) > 0 ){
+                n.derecha = rotarDerecha(n.derecha);
+                return rotarIzquierda(n);
+            }
+        
+        return n;
     }
     private void recorrerInOrder(Nodo n){
         if(n!=null){
             recorrerInOrder(n.izquierda);
-            System.out.println(n.llave + " " + n.contenido);
+            System.out.println("ID: "+n.llave + " | Cancion: " + n.contenido);
             recorrerInOrder(n.derecha);
         }
     }
@@ -154,9 +259,7 @@ public class AVL {
     }
     
 
-    public Nodo getRaiz()           {return raiz;}
-
-    public void setRaiz(Nodo raiz)  {this.raiz = raiz;}
+    
     
     
 }

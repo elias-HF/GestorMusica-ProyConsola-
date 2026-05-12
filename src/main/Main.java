@@ -55,7 +55,7 @@ public class Main {
         arbolAvl.buscar(2);
         
         arbolAvl.recorrerInOrder();
-        
+        System.out.println("Se elimino la cancion con ID 2");
         arbolAvl.eliminar(2);
         
         arbolAvl.recorrerInOrder();
