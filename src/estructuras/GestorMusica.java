@@ -29,12 +29,25 @@ public class GestorMusica {
     }
 
     public void agregarHistorial(String nombre) {
-        historial.agregar(nombre);
+        historial.push(nombre);
     }
 
     public void agregarPrioridad(String nombre) {
         prioridad.agregar(nombre);
     }
+
+    public String atenderCola() {
+        return cola.remover();
+    }
+
+    public String atenderHistorial() {
+        return historial.pop();
+    }
+
+    public void atenderPrioridad() {
+        prioridad.atender();
+    }
+
 
     public void mostrarTodo() {
 
@@ -48,7 +61,7 @@ public class GestorMusica {
         cola.mostrar();
 
         System.out.println("\nHISTORIAL");
-        historial.mostrar();
+        historial.mostrarPila();
 
         System.out.println("\nPRIORIDAD");
         prioridad.mostrar();
