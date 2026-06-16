@@ -10,6 +10,7 @@ package estructuras;
  */
 import java.util.PriorityQueue;
 
+
 public class ColaPrioridad {
 
     private PriorityQueue<String> cola = new PriorityQueue<>();
@@ -17,14 +18,22 @@ public class ColaPrioridad {
     public void agregar(String cancion) {
         cola.add(cancion);
     }
-
-    public void atender() {
-        if (!cola.isEmpty()) {
-            System.out.println("Prioridad: " + cola.poll());
+    public String atender() {
+        if (cola.isEmpty()) {
+            System.out.println("La cola de prioridad está vacía.");
+            return null;
         }
+        String cancion = cola.poll();
+        System.out.println("Reproduciendo por prioridad: " + cancion);
+        return cancion;
     }
 
     public void mostrar() {
-        System.out.println(cola);
+        if (cola.isEmpty()) {
+            System.out.println("Cola de prioridad vacía: []");
+            return;
+        }
+        System.out.print("Elementos en Cola de Prioridad: " + cola);
+        System.out.println();
     }
 }
