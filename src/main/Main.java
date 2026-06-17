@@ -59,6 +59,9 @@ public class Main {
         arbolAvl.eliminar(2);
         
         arbolAvl.recorrerInOrder();
+        //prueba03 arbolGeneral y ArbolBinario
+        
+        
     }
     
 }
