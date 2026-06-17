@@ -22,13 +22,18 @@ public class Cancion {
     }
     
     public Cancion(String titulo, String artista,String album, int duracion){
+        this.id = UUID.randomUUID().toString().replace("-", "").substring(0, 6);
         this.titulo = titulo;
         this.artista = artista;
         this.album = album;
         this.duracion = duracion;
     }
     
-
+    
+    @Override
+    public String toString() {
+        return "[" + id + "] " + titulo + " - " + artista + " (" + album + ", " + duracion + "s)";
+    }
 
     public String getTitulo() {
         return titulo;

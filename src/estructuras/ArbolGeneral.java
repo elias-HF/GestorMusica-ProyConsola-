@@ -10,8 +10,12 @@ public class ArbolGeneral {
     
     Nodo raiz;
 
-    public ArbolGeneral(Nodo raiz) {
+    public ArbolGeneral() {
         this.raiz = null;
+    }
+
+    public Nodo getRaiz() {
+        return raiz;
     }
     
     
@@ -30,6 +34,7 @@ public class ArbolGeneral {
             this.llave = indice;
             this.contenido = null;
         }
+    }    
         
         public boolean insertar(int llavePadre, int nuevaLlave, Cancion c) {
             Nodo nuevo = new Nodo(nuevaLlave);
@@ -60,7 +65,7 @@ public class ArbolGeneral {
             }
             
             for(Nodo hijo:actual.hijos){
-                Nodo encontrado = buscarNodo(actual,actual.llave);
+                Nodo encontrado = buscarNodo(hijo,i);
                 
                 if(encontrado != null){
                     return encontrado; 
@@ -94,5 +99,17 @@ public class ArbolGeneral {
             return false;
         }
         
-    }
+        //recorrido
+        public void recorrerPreOrder(Nodo n){
+            if(n != null){
+                System.out.println("Indice: " + n.llave + "Cancion: " + n.contenido); 
+                
+                for(Nodo hijo: n.hijos){
+                    recorrerPreOrder(hijo);
+                }
+            
+            }
+        }
+        
+    
 }
