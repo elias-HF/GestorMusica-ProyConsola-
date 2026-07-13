@@ -4,6 +4,8 @@
  */
 package estructuras;
 
+import modelo.Cancion;
+
 
 
 /**
@@ -15,10 +17,10 @@ package estructuras;
 public class Cola {
 
     private static class Nodo {
-        String dato;
+        Cancion dato;
         Nodo siguiente;
 
-        public Nodo(String dato) {
+        public Nodo(Cancion dato) {
             this.dato = dato;
             this.siguiente = null;
         }
@@ -34,7 +36,7 @@ public class Cola {
         this.tamano = 0;
     }
 
-    public void agregar(String elemento) {
+    public void agregar(Cancion elemento) {
         Nodo nuevoNodo = new Nodo(elemento);
 
         if (estaVacia()) {
@@ -48,13 +50,13 @@ public class Cola {
         System.out.println("-> Cola: Se agregó \"" + elemento + "\" a la fila de reproducción.");
     }
 
-    public String remover() {
+    public Cancion remover() {
         if (estaVacia()) {
             System.out.println("¡Error! La cola está vacía, no se puede remover elementos.");
             return null;
         }
 
-        String valorFrente = frente.dato;
+        Cancion valorFrente = frente.dato;
         frente = frente.siguiente;
 
         if (frente == null) {
@@ -65,7 +67,7 @@ public class Cola {
         return valorFrente;
     }
 
-    public String peek() {
+    public Cancion peek() {
         if (estaVacia()) {
             System.out.println("La cola está vacía, no hay elementos al frente.");
             return null;

@@ -1,39 +1,37 @@
 
 package modelo;
 
-import java.util.UUID;
-
-
 
 public class Cancion {
-    private String id;
+    private static int contador = 1;
+    
+    private final int id;
     private String titulo;
     private String artista;
     private String album;
     private int duracion;
+    private String genero;
     
-    public Cancion(){};
     
-    public Cancion(String id, String titulo, String artista,String album, int duracion){
-        this.id = UUID.randomUUID().toString().replace("-", "").substring(0, 6);
+    public Cancion(String titulo){
+        this.titulo = titulo;
+        this.id = contador++;
+    };
+    
+    public Cancion( String titulo, String artista,String album, int duracion, String genero){
+        this.id = contador++;
         this.titulo = titulo;
         this.artista = artista;
         this.album = album;
         this.duracion = duracion;
+        this.genero = genero;
     }
     
-    public Cancion(String titulo, String artista,String album, int duracion){
-        this.id = UUID.randomUUID().toString().replace("-", "").substring(0, 6);
-        this.titulo = titulo;
-        this.artista = artista;
-        this.album = album;
-        this.duracion = duracion;
-    }
     
     
     @Override
     public String toString() {
-        return "[" + id + "] " + titulo + " - " + artista + " (" + album + ", " + duracion + "s)";
+        return "[" + id + "] " + titulo + " - " + artista + " - " + genero + " (" + album + ", " + duracion + "s)";
     }
 
     public String getTitulo() {
@@ -68,12 +66,17 @@ public class Cancion {
         this.duracion = duracion;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
     
    

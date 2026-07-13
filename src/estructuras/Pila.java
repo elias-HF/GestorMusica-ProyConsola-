@@ -4,6 +4,8 @@
  */
 package estructuras;
 
+import modelo.Cancion;
+
 /**
  *
  * @author EBER
@@ -12,10 +14,10 @@ package estructuras;
 public class Pila {
 
     private static class Nodo {
-        String dato;
+        Cancion dato;
         Nodo siguiente;
 
-        public Nodo(String dato) {
+        public Nodo(Cancion dato) {
             this.dato = dato;
             this.siguiente = null;
         }
@@ -29,7 +31,7 @@ public class Pila {
         this.tamano = 0;
     }
 
-    public void push(String elemento) {
+    public void push(Cancion elemento) {
         Nodo nuevoNodo = new Nodo(elemento);
         nuevoNodo.siguiente = cima;
         cima = nuevoNodo;
@@ -37,18 +39,18 @@ public class Pila {
         System.out.println("-> Push: Se agregó \"" + elemento + "\" al historial.");
     }
 
-    public String pop() {
+    public Cancion pop() {
         if (estaVacia()) {
             System.out.println("¡Error! El historial está vacío, no se puede hacer Pop.");
             return null;
         }
-        String valorCima = cima.dato; // Cambiado a String
+        Cancion valorCima = cima.dato; // Cambiado a String
         cima = cima.siguiente;
         tamano--;
         return valorCima;
     }
 
-    public String peek() {
+    public Cancion peek() {
         if (estaVacia()) {
             System.out.println("El historial está vacío, no hay elementos en la cima.");
             return null;

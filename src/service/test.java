@@ -2,7 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package estructuras;
+package service;
+
+import estructuras.Pila;
+import modelo.Cancion;
 
 /**
  *
@@ -87,7 +90,7 @@ public class test {
 
         System.out.println("\n--- PROBANDO HISTORIAL DEL GESTOR ---");
         System.out.println("Removiendo última canción escuchada del historial...");
-        String ultimaEscuchada = gestor.atenderHistorial();
+        Cancion ultimaEscuchada = gestor.atenderHistorial();
         System.out.println("<- Canción removida del historial: " + ultimaEscuchada);
     }
 }

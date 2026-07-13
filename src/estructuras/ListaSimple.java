@@ -4,6 +4,8 @@
  */
 package estructuras;
 
+import modelo.Cancion;
+
 /**
  *
  * @author EBER
@@ -11,10 +13,10 @@ package estructuras;
 public class ListaSimple {
 
     class Nodo {
-        String cancion;
+        Cancion cancion;
         Nodo siguiente;
 
-        Nodo(String cancion) {
+        Nodo(Cancion cancion) {
             this.cancion = cancion;
             this.siguiente = null;
         }
@@ -22,7 +24,7 @@ public class ListaSimple {
 
     private Nodo cabeza;
 
-    public void agregar(String cancion) {
+    public void agregar(Cancion cancion) {
         Nodo nuevo = new Nodo(cancion);
 
         if (cabeza == null) {

@@ -9,21 +9,22 @@ package estructuras;
  * @author EBER
  */
 import java.util.PriorityQueue;
+import modelo.Cancion;
 
 
 public class ColaPrioridad {
 
-    private PriorityQueue<String> cola = new PriorityQueue<>();
+    private PriorityQueue<Cancion> cola = new PriorityQueue<>();
 
-    public void agregar(String cancion) {
+    public void agregar(Cancion cancion) {
         cola.add(cancion);
     }
-    public String atender() {
+    public Cancion atender() {
         if (cola.isEmpty()) {
             System.out.println("La cola de prioridad está vacía.");
             return null;
         }
-        String cancion = cola.poll();
+        Cancion cancion = cola.poll();
         System.out.println("Reproduciendo por prioridad: " + cancion);
         return cancion;
     }
