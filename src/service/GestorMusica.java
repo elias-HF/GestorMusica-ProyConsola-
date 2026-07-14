@@ -15,6 +15,7 @@ import modelo.Cancion;
  *
  * @author EBER
  */
+
 public class GestorMusica {
 
     private ListaSimple canciones;
@@ -22,41 +23,55 @@ public class GestorMusica {
     private Cola cola;
     private Pila historial;
     private ColaPrioridad prioridad;
-    
-    public GestorMusica(){
+
+    public GestorMusica() {
+
         canciones = new ListaSimple();
         playlist = new ListaDoble();
         cola = new Cola();
         historial = new Pila();
         prioridad = new ColaPrioridad();
-        
+
     }
-    
-    //crear cancion solo con nombre
-    public void agregarCancion(String nombre) {
-        
-        Cancion c = new Cancion(nombre);
+
+    public void agregarCancion(String titulo) {
+
+        Cancion c = new Cancion(titulo);
         canciones.agregar(c);
-        
-    }
-    
-    //crear una cancion con todos sus atributos
-    
-    //agregar una objeto concion solo con su nombre a una lista doble de canciones.
-    public void agregarPlaylist(Cancion nombre) {
-        playlist.agregar(nombre);
+
     }
 
-    public void agregarCola(Cancion nombre) {
-        cola.agregar(nombre);
+    public void agregarCancion(String titulo,
+                               String artista,
+                               String album,
+                               int duracion,
+                               String genero) {
+
+        Cancion c = new Cancion(
+                titulo,
+                artista,
+                album,
+                duracion,
+                genero);
+
+        canciones.agregar(c);
+
     }
 
-    public void agregarHistorial(Cancion nombre) {
-        historial.push(nombre);
+    public void agregarPlaylist(Cancion c) {
+        playlist.agregar(c);
     }
 
-    public void agregarPrioridad(Cancion nombre) {
-        prioridad.agregar(nombre);
+    public void agregarCola(Cancion c) {
+        cola.agregar(c);
+    }
+
+    public void agregarHistorial(Cancion c) {
+        historial.push(c);
+    }
+
+    public void agregarPrioridad(Cancion c) {
+        prioridad.agregar(c);
     }
 
     public Cancion atenderCola() {
@@ -71,22 +86,64 @@ public class GestorMusica {
         prioridad.atender();
     }
 
+    public void mostrarBiblioteca() {
+        canciones.mostrar();
+    }
+
+    public void mostrarPlaylist() {
+        playlist.mostrar();
+    }
+
+    public void mostrarCola() {
+        cola.mostrar();
+    }
+
+    public void mostrarHistorial() {
+        historial.mostrarPila();
+    }
+
+    public void mostrarPrioridad() {
+        prioridad.mostrar();
+    }
 
     public void mostrarTodo() {
 
-        System.out.println("\nLISTA SIMPLE");
+        System.out.println("\n===== LISTA SIMPLE =====");
         canciones.mostrar();
 
-        System.out.println("\nPLAYLIST");
+        System.out.println("\n===== PLAYLIST =====");
         playlist.mostrar();
 
-        System.out.println("\nCOLA");
+        System.out.println("\n===== COLA =====");
         cola.mostrar();
 
-        System.out.println("\nHISTORIAL");
+        System.out.println("\n===== HISTORIAL =====");
         historial.mostrarPila();
 
-        System.out.println("\nPRIORIDAD");
+        System.out.println("\n===== PRIORIDAD =====");
         prioridad.mostrar();
+
     }
+
+
+    public ListaSimple getCanciones() {
+        return canciones;
+    }
+
+    public ListaDoble getPlaylist() {
+        return playlist;
+    }
+
+    public Cola getCola() {
+        return cola;
+    }
+
+    public Pila getHistorial() {
+        return historial;
+    }
+
+    public ColaPrioridad getPrioridad() {
+        return prioridad;
+    }
+
 }
