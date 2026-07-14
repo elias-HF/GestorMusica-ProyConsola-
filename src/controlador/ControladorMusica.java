@@ -39,13 +39,11 @@ public class ControladorMusica {
                     break;
 
                 case 2:
-                    System.out.println("\nLista Doble (En construcción)");
-                    pausa();
+                    menuListaDoble();
                     break;
 
                 case 3:
-                    System.out.println("\nPila (En construcción)");
-                    pausa();
+                    menuPila();
                     break;
 
                 case 4:
@@ -158,6 +156,161 @@ public class ControladorMusica {
         } while (op != 0);
 
     }
+
+    private void menuListaDoble() {
+
+        int op;
+
+        do {
+
+            System.out.println("\n==============================");
+            System.out.println("        PLAYLIST");
+            System.out.println("==============================");
+            System.out.println("1. Agregar canción a Playlist");
+            System.out.println("2. Mostrar Playlist");
+            System.out.println("0. Regresar");
+            System.out.print("Opción: ");
+
+            op = leerEntero();
+
+            switch (op) {
+
+                case 1:
+
+                    System.out.print("Ingrese el ID de la canción: ");
+                    int id = leerEntero();
+
+                    Cancion c = gestor.getCanciones().buscar(id);
+
+                    if (c != null) {
+
+                        gestor.agregarPlaylist(c);
+                        System.out.println("\nCanción agregada a la Playlist.");
+
+                    } else {
+
+                        System.out.println("\nNo existe una canción con ese ID.");
+
+                    }
+
+                    pausa();
+
+                    break;
+
+                case 2:
+
+                    System.out.println("\n===== PLAYLIST =====");
+                    gestor.mostrarPlaylist();
+
+                    pausa();
+
+                    break;
+
+                case 0:
+                    break;
+
+                default:
+
+                    System.out.println("\nOpción incorrecta.");
+                    pausa();
+
+            }
+
+        } while (op != 0);
+
+    }
+
+
+    private void menuPila() {
+
+        int op;
+
+        do {
+
+            System.out.println("\n==============================");
+            System.out.println("         HISTORIAL");
+            System.out.println("==============================");
+            System.out.println("1. Escuchar canción (Push)");
+            System.out.println("2. Ver última canción (Peek)");
+            System.out.println("3. Eliminar última canción (Pop)");
+            System.out.println("4. Mostrar historial");
+            System.out.println("0. Regresar");
+            System.out.print("Opción: ");
+
+            op = leerEntero();
+
+            switch (op) {
+
+                case 1:
+
+                    System.out.print("Ingrese el ID de la canción: ");
+                    int id = leerEntero();
+
+                    Cancion c = gestor.getCanciones().buscar(id);
+
+                    if (c != null) {
+
+                        gestor.agregarHistorial(c);
+
+                    } else {
+
+                        System.out.println("\nNo existe una canción con ese ID.");
+
+                    }
+
+                    pausa();
+
+                    break;
+
+                case 2:
+
+                    Cancion ultima = gestor.getHistorial().peek();
+
+                    if (ultima != null) {
+                        System.out.println("\nÚltima canción escuchada:");
+                        System.out.println(ultima);
+                    }
+
+                    pausa();
+
+                    break;
+
+                case 3:
+
+                    Cancion eliminada = gestor.atenderHistorial();
+
+                    if (eliminada != null) {
+                        System.out.println("\nSe eliminó del historial:");
+                        System.out.println(eliminada);
+                    }
+
+                    pausa();
+
+                    break;
+
+                case 4:
+
+                    System.out.println();
+                    gestor.mostrarHistorial();
+
+                    pausa();
+
+                    break;
+
+                case 0:
+                    break;
+
+                default:
+
+                    System.out.println("\nOpción incorrecta.");
+                    pausa();
+
+            }
+
+        } while (op != 0);
+
+    }
+
 
     private int leerEntero() {
 
