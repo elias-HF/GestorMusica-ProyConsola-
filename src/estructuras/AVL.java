@@ -144,6 +144,12 @@ public class AVL {
         return null;
     }
     
+    private Cancion buscarRecursivo(Nodo n, int id) {
+        if (n == null) return null;
+        if (id == n.llave) return n.contenido;
+        return id < n.llave ? buscarRecursivo(n.izquierda, id) : buscarRecursivo(n.derecha, id);
+    }
+    
     //buscamos el minimo (subMetodo para eliminarAVL).
     private Nodo minimo(Nodo n){
         while(n.izquierda != null){
@@ -246,6 +252,11 @@ public class AVL {
         
         return n;
     }
+    
+    
+
+    
+    
     private void recorrerInOrder(Nodo n){
         if(n!=null){
             recorrerInOrder(n.izquierda);
@@ -257,7 +268,13 @@ public class AVL {
     public void recorrerInOrder(){
         recorrerInOrder(raiz);
     }
-    
+    public void mostrarInOrden() {
+        if (raiz == null) {
+            System.out.println("Árbol AVL vacío.");
+        } else {
+            recorrerInOrder(raiz);
+        }
+}
 
     
     

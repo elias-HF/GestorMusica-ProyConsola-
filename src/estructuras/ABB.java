@@ -67,14 +67,14 @@ public class ABB {
         }
     }
     
-    public Cancion buscar(int i){
+    public Cancion buscar(int id){
         Nodo aux= raiz;
         
         while(aux != null){
             //si el indice buscado coicide con la raiz, entonces devuelve la cacion, caso contrarios empezara a buscar por la izquierda y luego la derecha.
-            if(i==aux.llave){
+            if(id==aux.llave){
                 return aux.contenido;
-            }else if(i < aux.llave){
+            }else if(id < aux.llave){
                 aux = aux.izquierda;
             }else{
                 aux = aux.derecha;
@@ -160,8 +160,7 @@ public class ABB {
         
     }
         
-        
-    
+
     
     public void recorridoInOrden(Nodo n){
         if(n!=null){
@@ -172,6 +171,14 @@ public class ABB {
             
         }
     }
+    //metodo para iniciar el recorrido desde la raiz
+    public void mostrarInOrden() {
+    if (raiz == null) {
+        System.out.println("Árbol ABB vacío.");
+    } else {
+        recorridoInOrden(raiz);
+    }
+}
     
     //getter and setters
 

@@ -111,5 +111,13 @@ public class ArbolGeneral {
             }
         }
         
+        public void mostrarPreOrden() {
+            if (raiz == null) {
+                System.out.println("Árbol de géneros vacío.");
+            } else {
+                recorrerPreOrder(raiz);
+            }
+        }
+        
     
 }
